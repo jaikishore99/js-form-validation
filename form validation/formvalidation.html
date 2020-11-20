@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery.min.js"></script>
+<!---------------------------------------------------------------------------------------------------------------------------------------->
+
+<style type="text/css">
+    
+    
+    body{
+        font-family:Helvetica, sans-serif;
+    }
+
+    label{
+        position: relative;
+        top: 10px;
+        width: 200px;
+        width: 150px;
+        float: left;
+    }
+
+    #Email{
+        padding: 5px;
+        font-size: 20px;
+        border-radius: 5px;
+        border: 1px solid black;
+        width :300px;
+        margin-left: 25px;
+
+        
+    }
+ 
+    #Telephone{
+        padding: 5px;
+        font-size: 20px;
+        border-radius: 5px;
+        border: 1px solid black;
+        width :300px;
+        margin-left: 25px;
+       
+    }
+ 
+    #Password{
+        padding: 5px;
+        font-size: 20px;
+        border-radius: 5px;
+        border: 1px solid black;
+        width :300px;
+        margin-left: 25px;
+       
+    }
+ 
+    #c-Password{
+        padding: 5px;
+        font-size: 20px;
+        border-radius: 5px;
+        border: 1px solid black;
+        width :300px;
+        margin-left: 25px;
+     
+    }
+
+    #form-container{
+        width: 500px;
+        margin: 0 auto;
+    }
+
+    .form-validation {
+        float: left;
+        margin: 4px;
+    }
+   
+    #submit{
+        padding: 5px;
+        font-size: 20px;
+        border-radius: 5px;
+        border: 2px solid lightseagreen;
+        width :100px;
+        background-color: lightskyblue;
+        margin-left: 175px;
+    }
+
+    #submit:hover{
+        padding: 5px;
+        font-size: 20px;
+        border-radius: 5px;
+        border: 2px solid rgb(184, 50, 50);
+        width :100px;
+        background-color:lightcoral ;
+        margin-left: 175px;
+
+    }
+
+    #errorMessage{
+        color: red;
+        font-size: 90% !important;
+    }
+   
+    #sucessfull{
+        color: rgb(8, 87, 8);
+        font-size: 90% !important;
+        display: none;
+        margin-left: 390px;
+        margin-bottom: 50px;
+    }    
+
+
+</style>
+
+
+
+</head>
+
+
+<body>
+    
+    
+    <div id="form-container">
+    
+        <div id="errorMessage"></div>
+        
+        <div class="form-validation"><label for="Email">Email</label>
+                           
+            <input type="text" name="Email" id="Email" placeholder="Eg:Yourmail@gmail.com">
+        
+        </div>
+        
+        
+        <div class="form-validation"><label for="Telephone">Telephone</label>
+                           
+            <input type="text" name="Telephone" id="Telephone" placeholder="Eg:0123456789">
+        
+        </div>
+       
+       
+        <div class="form-validation"><label for="Password">Password</label>
+                           
+            <input type="password" name="Password" id="Password" placeholder="XXXXXXXX">
+        
+        </div>
+        
+        
+        <div class="form-validation"><label for="Confirm Password">Confirm Password</label>
+                           
+            <input type="password" name="Confirm Password" id="c-Password" placeholder="XXXXXXXX">
+        
+        </div>
+        
+        
+        <div class="form-validation">
+                           
+            <input type="submit" id="submit" value="Login">&nbsp;<div id="sucessfull"> done! Login</div>
+        
+        </div>
+    
+    
+    </div>
+
+<!----------------------------------------------------------------------------------------------------------------------------------------->
+
+    <script type="text/javascript">
+
+    /* form validation system*/ 
+   
+    function isEmail(email) {
+      
+       var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+   
+   return regex.test(email);
+   
+   }
+
+   
+   $("#submit").click(function(){
+      
+       var errorMessage = ""
+      
+       var fieldsMissing =""
+
+      
+       if ($("#Email").val() == ""){
+      
+           fieldsMissing += "<br>Email"
+      
+       }
+      
+       if ($("#Telephone").val() == ""){
+      
+           fieldsMissing += "<br>phonenumber"
+      
+       }
+      
+       if ($("#Password").val() == ""){
+      
+           fieldsMissing += "<br>password"
+      
+       }
+      
+       if ($("#c-Password").val() == ""){
+      
+           fieldsMissing += "<br>confirm pasword"
+      
+       }
+       if(fieldsMissing != ""){
+      
+      
+           errorMessage += "<p>the following fields are missimg:" +
+fieldsMissing
+       
+       }
+       
+           if(isEmail($("#Email").val()) == false)
+       
+           {
+       
+               errorMessage += "<p>your email is not found ! try again</p>"
+       
+           } 
+       
+           if($.isNumeric($("#Telephone").val()) == false){
+       
+               errorMessage += "<p>your phonenumber is incorrect or not found ! try again</p>"
+       
+           }
+       
+           if($("#Password").val() != $("#c-Password").val()){
+       
+               errorMessage += "<p>your password is incorrect or not matching! please try again</p>"
+       
+           }
+       
+           //alert(errorMessage) 
+       
+           if(errorMessage != ""){
+       
+               $("#errorMessage").html(errorMessage)
+       
+           }else{
+       
+               $("#sucessfull").show()
+       
+           }  
+
+})
+    
+    </script>
+
+</body>
+
+</html>
